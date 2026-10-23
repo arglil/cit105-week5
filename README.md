@@ -1,5 +1,3 @@
-
-
 \# CIT 105 Week 5 - Public API Consumption Exercise
 
 
@@ -303,4 +301,50 @@ The application and tests were executed locally, and the results documented abov
 \- README.md - Project documentation
 
 
+
+\## Assignment 2 – Structured Prompt Script
+
+
+
+\### API Access and Testing Limitation
+
+
+
+The `extract.py` application was developed to convert unstructured invoice text into structured JSON data for the Unified Business Hub capstone project.
+
+
+
+The application includes environment-variable configuration, structured prompting, JSON extraction, schema validation, HTTP error handling, timeout handling, and token-usage reporting.
+
+
+
+\*\*Live API testing was not performed\*\* because the course API credentials, provider information, and model configuration were not provided.
+
+
+
+Instead, the parser was tested locally using saved AI response strings. These tests do not require an API connection or consume tokens.
+
+
+
+Seven parser tests passed, as observed during local testing. The live API integration remains unverified.
+
+
+
+\### Model Output Observations
+
+
+
+The test cases demonstrate that AI-generated responses may contain Markdown code fences, introductory text, incomplete JSON, or values that violate the required schema. The parser is designed to handle these cases without crashing.
+
+
+
+These are simulated response scenarios, not observations from a live AI model.
+
+
+
+\### AI Assistance Disclosure
+
+
+
+ChatGPT assisted with the Python implementation, parser design, test examples, debugging guidance, and documentation. The invoice extraction schema was reviewed and approved by the student. The prompt wording should be independently reviewed and revised by the student before submission.
 
