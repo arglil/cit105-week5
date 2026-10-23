@@ -305,6 +305,93 @@ The application and tests were executed locally, and the results documented abov
 \## Assignment 2 – Structured Prompt Script
 
 
+### Project Purpose
+
+The Structured Prompt Script extracts invoice line items from unstructured text and converts them into a Python list of dictionaries. It is designed as a backend component for the Unified Business Hub capstone.
+
+### Required JSON Schema
+
+The AI response must be a JSON array. Every item must contain exactly these four fields:
+
+| Field | Type | Validation |
+|---|---|---|
+| `item_name` | String | Non-empty |
+| `quantity` | Number | Greater than 0 |
+| `unit` | String | `each`, `box`, `case`, `pack`, `kg`, `lb`, or `liter` |
+| `unit_price` | Number | Greater than or equal to 0 |
+
+Example valid response:
+
+```json
+[
+  {
+    "item_name": "Bottled Water",
+    "quantity": 3,
+    "unit": "case",
+    "unit_price": 12.50
+  }
+]
+```
+
+### Full Structured Prompt
+
+The following is the current prompt used in `extract.py`:
+
+```text
+Extract invoice line items from the text provided.
+
+Return a JSON array of objects. Every object must have exactly
+these four keys:
+
+- item_name: non-empty string
+- quantity: positive number greater than zero
+- unit: one of "each", "box", "case", "pack", "kg", "lb", "liter"
+- unit_price: number greater than or equal to zero
+
+Use the singular unit name. Do not invent missing prices,
+quantities, or items. If an item cannot be represented with
+all four required fields, omit it.
+
+Return [] if there are no valid invoice items.
+
+Do not include a preamble, explanation, markdown code fence,
+comments, or any text outside the JSON array.
+```
+
+The prompt and validation rules should be reviewed and revised by the student before final submission, as required by the assignment.
+
+### Environment Configuration
+
+The application reads three environment variables:
+
+- `AI_API_KEY` — API authentication key
+- `AI_API_URL` — OpenAI-compatible chat completions endpoint
+- `AI_MODEL` — Model identifier
+
+The `.env.example` file documents these names without containing credentials. Actual secrets must not be committed to GitHub.
+
+In PowerShell, once valid course credentials are available, the variables can be configured for the current session:
+
+```powershell
+$env:AI_API_KEY = "YOUR_COURSE_API_KEY"
+$env:AI_API_URL = "YOUR_COURSE_API_ENDPOINT"
+$env:AI_MODEL = "YOUR_COURSE_MODEL"
+```
+
+The values above are placeholders, not functioning credentials. The application reads operating-system environment variables directly; it does not automatically load a `.env` file.
+
+### Offline Parser Testing
+
+Run:
+
+```powershell
+python -m pytest test_extract.py -v
+```
+
+Seven parser tests passed during local testing, as reported by the student. The tests cover clean JSON, Markdown fences, introductory text, missing JSON, truncated JSON, invalid units, and missing fields.
+
+The live API integration was not tested because course credentials and provider information were unavailable.
+
 
 \### API Access and Testing Limitation
 
