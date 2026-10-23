@@ -184,6 +184,26 @@ Result: Passed. The application handled the HTTP 404 error without crashing.
 
 \### Test 2: Network Timeout
 
+### Network Timeout and Connection Errors
+
+**Test 1: Network Timeout**
+
+The request timeout was set to a very small value.
+
+```text
+Enter a city name: maimi
+The service took too long to respond. Please try again.
+```
+
+**Test 2: No Network (Wi-Fi Disconnected)**
+
+Wi-Fi was disconnected before running the application.
+
+```text
+Enter a city name: miami
+Could not reach the service. Check your internet connection and try again.
+```
+
 
 
 Command:
